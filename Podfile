@@ -6,5 +6,7 @@ target 'RxViewControllerCommunication' do
   use_frameworks!
 
   # Pods for RxViewControllerCommunication
-    pod 'RxSwift',    '~> 4.0'
+pod 'RxSwift'
+pod 'RxCocoa'
+
 end

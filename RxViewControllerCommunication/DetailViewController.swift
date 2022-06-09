@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import RxSwift
 
-protocol CharacterDelegate {
-    func didSelectCharacter (_ name:String)
-}
+//protocol CharacterDelegate {
+//    func didSelectCharacter (_ name:String)
+//}
 
 class DetailViewController: UIViewController {
    
     
-    var delegate:CharacterDelegate?
+    //var delegate:CharacterDelegate?
+    
+    private let selectedCharacterVariable = Variable("User")
+    var selectedCharacter: Observable<String> {
+        return self.selectedCharacter.asObservable()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +39,14 @@ class DetailViewController: UIViewController {
     @IBAction func characterSelected(_ sender: UIButton) {
         guard let characterName = sender.titleLabel?.text else {return}
         
+        // Change the variable value
+        selectedCharacterVariable.value = characterName
+        
+        /*
         if let delegateObject = delegate {
             delegateObject.didSelectCharacter(characterName)
         }
+         */
         
     }
     
