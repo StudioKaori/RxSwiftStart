@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 //protocol CharacterDelegate {
 //    func didSelectCharacter (_ name:String)
@@ -18,9 +19,9 @@ class DetailViewController: UIViewController {
     
     //var delegate:CharacterDelegate?
     
-    private let selectedCharacterVariable = Variable("User")
+    private let selectedCharacterVariable = BehaviorRelay(value: "User")
     var selectedCharacter: Observable<String> {
-        return self.selectedCharacter.asObservable()
+        return self.selectedCharacterVariable.asObservable()
     }
     
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class DetailViewController: UIViewController {
         guard let characterName = sender.titleLabel?.text else {return}
         
         // Change the variable value
-        selectedCharacterVariable.value = characterName
+        selectedCharacterVariable.accept(characterName)
         
         /*
         if let delegateObject = delegate {
